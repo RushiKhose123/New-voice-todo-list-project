@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login - Voice To-Do list</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="auth.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <style>
+            body{
+                font-family: 'Poppins', sans-serif;
+                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                min-height: 100vh;
+                margin: 0;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: auto;
+            }
+           .auth-container{
+                max-width: 2000px;
+                margin: 50px auto;
+                padding: 20px;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .auth-form{
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .auth-form input{
+                padding: 10px;
+                border: 1px solid black;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+            .auth-form button{
+                padding: 10px;
+                background: green;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .auth-form button:hover{
+                background-color: greenyellow;
+            }
+            .toggle-auth{
+                color: green;
+                text-decoration: none;
+
+            }
+            .error-message{
+                color: red;
+                margin-top: 10px;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="auth-container">
+            <div class="logo-container">
+                <i class="fas fa-tasks"></i>
+                <h2 id="auth-title"> Welcome Back</h2>
+            </div>
+            
+            <p class="subtitle">Please login to youe Account</p>
+
+            <form id="auth-form" class="auth-form">
+             
+                <div class="auth-form">
+                    <label for="email">Email Address</label>
+                    <div class="input-group">
+
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+
+               <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password">Forgot password</a>
+                    </div>
+                </div>
+          
+
+                <button type="submit" id="auth-button">
+                    <span>Login</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+        
+            <div class="social-login">
+                <p>Or Continue with</p>
+                <div class="social-buttons">
+                    <div class="social-button" title="Login with Google">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="social-button" title="Login with Facebooks">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toggle-auth">
+                <a href="#" id="toggle-auth-link">
+                    <span>Don't have account Sign Up?</span>
+                    <span class="highlight">Sign up</span>
+                </a>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+        </div>
+
+        <div id="loading-overlay" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.5.25/jsrsasign-all-min.js"></script>
+        <script type="module" src="auth.js"></script>
+        <script type="module" src="social-auth.js"></script>
+    </body>
+</html>

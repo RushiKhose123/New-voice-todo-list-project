@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice To-Do list</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    .header-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .logout-btn{
+        background-color: var(--danger-color);
+        color: white;
+        border: none;
+        padding: 0px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .logout-btn:hover{
+        background-color: #e74c3c;
+        transform: translateY(-2px);
+        box-shadow:0 4px 8px var(--shadow-color);
+    }
+    .task-filter{
+        margin: 20px 0;
+        text-align: right;
+    
+    }
+    .task-filter select{
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        border: 3px solid #ccc;
+        background-color: white;
+        cursor: pointer;
+    }
+    .task-filter section:focus{
+        outline: none;
+        border-color: blue;
+    }
+    .no-tasks-message{
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-style: italic;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div>
+                <h1><i class="fas fa-microphone-alt"></i> Voice To-Do List</h1>
+                <p>Organize your tasks using voice commands</p>
+            </div>
+            <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i>Logout</button>
+        </div>
+    </header>
+
+    <main>
+        <section class = "todo-container">
+            <h2><i class="fas fa-plus-circle"></i>Add a Task</h2>
+            <div class="task-filter">
+                <select id="dateFilter" onchange="filterTasks()">
+                    <option value="all"> All Tasks</option>
+                    <option value="7"> Next 7 days</option>
+                    <option value="15"> Next 15 days</option>
+                    <option value="30"> Next 30 days</option>
+                </select>
+            </div>
+            <button class="voice-btn"><i class="fas fa-microphone-alt"></i>Add task by Voice</button>
+            <div id = "todo-list"></div>
+        </section>
+        <section class = "task-details">
+            <h2>Task Breakdown</h2>
+            <div id = "task-output">
+                <div class = "task-info">
+                    <p><strong>Operation:</strong> <span id = "operation"></span></p>
+                    <p><strong>Task:</strong> <span id = "task"></span></p>
+                    <p><strong>Urgency:</strong> <span id = "urgency"></span></p>
+                    <p><strong>Date/Time:</strong> <span id = "datetime"></span></p>
+                </div>
+                <div id = "confirmation-area"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Voice To-Do List 2025</p>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            const themetoggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            const icon = themetoggle.querySelector('i');
+
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            updateIcom(savedTheme);
+            themetoggle.addEventListener('click', ()=>{
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light'?'dark':'light';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcom(newTheme);
+            });
+
+            function updateIcom(theme){
+                if (theme==='dark') {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }else{
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            }
+        })
+    </script>
+</body>
+</html>
